@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nodejs:
+    image: node:16.9.1-buster
+    working_dir: /usr/app
+    restart: "no"
+    command: >
+      sh -c 'echo "Running setup...";
+      npm i yarn;
+      yarn install;
+      echo "Running postinstall...";
+      yarn postinstall;
+      echo "Building...";
+      yarn bundle'
+    volumes:
+      - .:/usr/app/
+    environment:
+      - NODE_ENV=development
