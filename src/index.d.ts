@@ -20,4 +20,4 @@ declare module "*.png" {
     export default content;
 }
 
-export {};
+declare const __static: string

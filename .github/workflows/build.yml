@@ -1,0 +1,29 @@
+name: Build & Bundle APP
+
+on: [workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Print Docker Compose version
+        run: docker compose version
+
+      - name: Building
+        run: |
+          docker compose up
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            dist/*.snap
+            dist/*.AppImage
+            dist/latest*.yml
